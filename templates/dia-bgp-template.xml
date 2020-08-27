@@ -1,0 +1,31 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+        <name>{/device}</name>
+      <config>
+        <router xmlns="urn:ios">
+          <bgp>
+            <as-no>36994</as-no>
+            <address-family>
+                 <ipv4>
+                  <af>unicast</af>
+                      <neighbor>
+                        <id>{/neighbor_ip}</id>
+                        <remote-as>{/remote_as}</remote-as>
+                        <route-map >
+                            <direction>in</direction>
+                            <route-map-name>{/rplIN}</route-map-name>
+                        </route-map>
+                        <route-map >
+                            <direction>out</direction>
+                            <route-map-name>{/rplOUT}</route-map-name>
+                        </route-map>
+                   </neighbor>
+                </ipv4>
+           </address-family>
+          </bgp>
+        </router>
+      </config>
+    </device>
+  </devices>
+</config-template>

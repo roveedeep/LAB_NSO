@@ -1,0 +1,32 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+        <name>{/device}</name>
+      <config>
+         <interface xmlns="urn:ios">
+          <Ethernet>
+              <name>{$interface_name}</name>
+              <description>[cust] - {/../../../description} - {/../description} - Solution-ID [{/../solution_id}]</description>
+                <encapsulation>
+                    <dot1Q>
+                        <vlan-id>{$vlan}</vlan-id>
+                    </dot1Q>
+                </encapsulation>
+                <vrf>
+                    <forwarding>{/../../../vrf}</forwarding>
+                </vrf>
+                <ip>
+                    <address>
+                        <primary>
+                            <address>{/ip}</address>
+                            <mask>{/mask}</mask>
+                        </primary>
+                    </address>
+                </ip>
+                <shutdown when="{starts-with($shutdown, 'true')}" />
+          </Ethernet>
+        </interface>
+       </config>
+    </device>
+  </devices>
+</config-template>

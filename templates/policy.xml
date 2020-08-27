@@ -1,0 +1,62 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+  <device>
+      <name>{/device}</name>
+      <config>
+      <policy-map xmlns="urn:ios">
+          <name>BL-MANAGED-{/shaper}-OUT</name>
+        <class-default>
+          <class>
+            <name>class-default</name>
+            <shape>
+              <average>
+                  <bit-rate>{$bps}</bit-rate>
+              </average>
+            </shape>
+            <service-policy>BL-MANAGED-OUT</service-policy>
+          </class>
+        </class-default>
+      </policy-map>
+      <policy-map xmlns="urn:ios">
+        <name>BL-MANAGED-OUT</name>
+        <class>
+          <name>DSCP-VOICE-OUT</name>
+          <priority>
+            <percent>10</percent>
+          </priority>
+        </class>
+        <class>
+          <name>DSCP-VIDEO-OUT</name>
+          <bandwidth>
+            <percent>10</percent>
+          </bandwidth>
+        </class>
+        <class>
+          <name>DSCP-BUSINESS-OUT</name>
+          <bandwidth>
+            <percent>40</percent>
+          </bandwidth>
+        </class>
+        <class>
+          <name>DSCP-STANDARD-OUT</name>
+          <bandwidth>
+            <percent>20</percent>
+          </bandwidth>
+        </class>
+        <class>
+          <name>DSCP-INTERACTIVE-OUT</name>
+          <bandwidth>
+            <percent>15</percent>
+          </bandwidth>
+        </class>
+      </policy-map>
+      <policy-map xmlns="urn:ios">
+        <name>EXP1</name>
+        <class>
+          <name>EXP1</name>
+        </class>
+      </policy-map>
+      </config>
+  </device>
+  </devices>
+</config>

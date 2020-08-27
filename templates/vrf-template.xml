@@ -1,0 +1,33 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+        <name>{/device}</name>
+        <config>
+        <vrf xmlns="urn:ios">
+        <definition>
+            <name>{/../vrf}</name>
+            <rd tags='merge'>{/rd}</rd>
+          <address-family>
+            <ipv4>
+              <export>
+                <map>to_grey</map>
+              </export>
+              <route-target>
+                <export>
+                    <asn-ip>{/rtExp}</asn-ip>
+                </export>
+                <import>
+                  <asn-ip>1:50</asn-ip>
+                </import>
+                <import>
+                    <asn-ip>{/rtImp}</asn-ip>
+                </import>
+              </route-target>
+            </ipv4>
+          </address-family>
+        </definition>
+        </vrf>
+        </config>
+    </device>
+  </devices>
+</config-template>
