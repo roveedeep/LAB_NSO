@@ -206,12 +206,14 @@ module network {
 
                     uses ncs:service-data;
                     ncs:servicepoint vpn-servicepoint;
-
+                    
                     leaf device {
                         type leafref {
-                        path "/ncs:devices/ncs:device/ncs:name";
+                            path 
+                        "/network/cust[vrf=current()/../../../../vrf]/l3vpn/device";
                         }
                     }
+                   
                     leaf vlan {
                         config false;
                         tailf:cdb-oper {
@@ -272,13 +274,6 @@ module network {
                             tailf:info "range : 1-65535";
                             type uint32{
                                 range "1..65535";
-                            }
-                        }
-
-                        leaf dev {
-                            type leafref {
-                                path 
-                            "/network/cust[vrf=current()/../../../../../vrf]/l3vpn/device";
                             }
                         }
 
@@ -344,21 +339,23 @@ module network {
                         container interface {
                             leaf Ethernet {
                                 tailf:info "Ethernet";
-                                type string;
+                                type leafref{
+                                     path 
+                                "/network/cust[vrf=current()/../../../../../../vrf]/vpn/solutionID[solution_id=current()/../../../../solution_id]/interface/interface_name";
+                                }
                                 mandatory true;
                             }
 
                         }
                         uses ncs:service-data;
                         ncs:servicepoint static-servicepoint;
-                        
                         leaf device {
                             type leafref {
-                            path "/ncs:devices/ncs:device/ncs:name";
+                                path 
+                            "/network/cust[vrf=current()/../../../../../vrf]/l3vpn/device";
                             }
-
                         }
-          
+                       
                     }
 
                 }
@@ -408,13 +405,13 @@ module network {
                     }
                         default false;
                 }
-                        
                 leaf device {
                     type leafref {
-                    path "/ncs:devices/ncs:device/ncs:name";
+                        path 
+                    "/network/cust[vrf=current()/../../../vrf]/l3vpn/device";
                     }
-
                 }
+                       
                 uses ncs:service-data;
                 ncs:servicepoint global-vpn-bgp-servicepoint;
 
