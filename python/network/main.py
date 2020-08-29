@@ -19,9 +19,28 @@ class ServiceCallbacks(Service):
 #        template.apply('bgp-vpn-template')
 
 #        template.apply('pe-int-template', vars)
-        template.apply('vrf-template', vars)
-        template.apply('bgp-template')
+        isp2 = ['uk1','uk2','uk3','uk4']
+        isp3 = ['o1','o2','o3','o4']
+        isp1 = ['m1','m2','h2','h3']
+        device = service.device
+        for dev in device:
+            self.log.info(dev)
+            self.log.info(dev in isp2)
+            self.log.info(dev in isp3)
+            self.log.info(dev in isp1)
+            if (dev in isp2) == True:
+                vars.add('AS', '4456')
+                template.apply('bgp-template', vars)
+                template.apply('vrf-template', vars)
+            elif (dev in isp3) == True:
+                vars.add('AS', '5599')
+                template.apply('bgp-template', vars)
+                template.apply('vrf-template', vars)
 
+            elif (dev in isp1) == True:
+                vars.add('AS', '36994')
+                template.apply('bgp-template', vars)
+                template.apply('vrf-template', vars)
 # ---------------------------------------------
 # COMPONENT THREAD THAT WILL BE STARTED BY NCS.
 # ---------------------------------------------

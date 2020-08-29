@@ -35,7 +35,7 @@ class ServiceCallbacks(Service):
             for sw in switch_device:
                 vars.add('switch_device', sw)
                 template.apply('sw_vlan', vars)
-
+#testing
         if service.device == 'h3' or service.device == 'h2':
 
             if p_int == '0/3' :

@@ -10,7 +10,7 @@
       <config>
         <router xmlns="urn:ios">
           <bgp>
-            <as-no>36994</as-no>
+              <as-no>{$AS}</as-no>
             <address-family>
               <with-vrf>
                 <ipv4>

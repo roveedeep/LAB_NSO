@@ -14,10 +14,23 @@ class ServiceCallbacks(Service):
     def cb_create(self, tctx, root, service, proplist):
         self.log.info('Service create(service=', service._path, ')')
         vars = ncs.template.Variables()
-#        vars.add('default-information-originate', service.default_information_originate)
+#        vars.add('AS', as_nun)
         template = ncs.template.Template(service)
-        template.apply('bgp-vpn-template', vars)
 
+        isp2 = ['uk1','uk2','uk3','uk4']
+        isp3 = ['o1','o2','o3','o4']
+        device = service.device
+        if (device in isp2) == True:
+            vars.add('AS', '4456')
+            template.apply('bgp-vpn-template', vars)
+
+        elif (device in isp3) == True:
+            vars.add('AS', '5599')
+            template.apply('bgp-vpn-template', vars)
+
+        else:
+            vars.add('AS', '36994')
+            template.apply('bgp-vpn-template', vars)
 # ---------------------------------------------
 # COMPONENT THREAD THAT WILL BE STARTED BY NCS.
 # ---------------------------------------------
