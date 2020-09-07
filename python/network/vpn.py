@@ -48,7 +48,7 @@ class ServiceCallbacks(Service):
                 vars.add('switch_device', sw)
                 template.apply('sw_vlan', vars)
 
-
+#gitTest2
 # ---------------------------------------------
 # COMPONENT THREAD THAT WILL BE STARTED BY NCS.
 # ---------------------------------------------

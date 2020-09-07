@@ -276,12 +276,12 @@ module network {
                                 range "1..65535";
                             }
                         }
-
                         leaf device {
-                            type leafref {
+                            type leafref{
                                 path 
-                            "/network/cust[vrf=current()/../../../../../vrf]/l3vpn/device";
+                                "/network/cust[vrf=current()/../../../../../vrf]/vpn/solutionID[solution_id=current()/../../../solution_id]/interface/device";
                             }
+
                         }
 
                         leaf rplIN {
@@ -349,12 +349,14 @@ module network {
                         }
                         uses ncs:service-data;
                         ncs:servicepoint static-servicepoint;
+                            
                         leaf device {
-                            type leafref {
+                            type leafref{
                                 path 
-                            "/network/cust[vrf=current()/../../../../../vrf]/l3vpn/device";
+                                "/network/cust[vrf=current()/../../../../../vrf]/vpn/solutionID[solution_id=current()/../../../solution_id]/interface/device";
                             }
-                        }
+
+                        }                    
                        
                     }
 
