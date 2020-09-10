@@ -17,6 +17,24 @@
                 <percent>{/DSCP-STANDARD-OUT/bandwidth}</percent>
             </bandwidth>
         </class>
+        <class when="{starts-with($vo_bandwidth, 'true')}" >
+            <name>DSCP-VOICE-OUT</name>
+            <bandwidth>
+                <percent>{/DSCP-VOICE-OUT/bandwidth}</percent>
+            </bandwidth>
+        </class>
+        <class when="{starts-with($vi_bandwidth, 'true')}" >
+            <name>DSCP-VIDEO-OUT</name>
+            <bandwidth>
+                <percent>{/DSCP-VIDEO-OUT/bandwidth}</percent>
+            </bandwidth>
+        </class>
+        <class when="{starts-with($i_bandwidth, 'true')}" >
+            <name>DSCP-INTERACTIVE-OUT</name>
+            <bandwidth>
+                <percent>{/DSCP-INTERACTIVE-OUT/bandwidth}</percent>
+            </bandwidth>
+        </class>
 
       </policy-map>
       </config>

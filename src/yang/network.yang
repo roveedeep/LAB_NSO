@@ -72,28 +72,44 @@ module network {
     }
 
     grouping classes {
-       
-        list classs {
-            key 'class_name bandwidth-percent';
-            leaf class_name{
-                type enumeration {
-                    enum DSCP-VOICE-OUT;
-                    enum DSCP-VIDEO-OUT;
-                    enum DSCP-STANDARD-OUT;
-                    enum DSCP-INTERACTIVE-OUT;
-                    enum DSCP-BUSINESS-OUT;
-                    enum DSCP-CONTROL-OUT;
-                    enum DSCP-DEFAULT-OUT;
-                }
-        
-            }
+        container DSCP-STANDARD-OUT{
 
-            leaf bandwidth-percent {
+            leaf bandwidth {
                 type uint32;
+                default 0;
+            }
+        }    
+        container DSCP-BUSINESS-OUT{
+
+            leaf bandwidth {
+                type uint32;
+                default 0;
+            }
+        }
+        container DSCP-VIDEO-OUT{
+
+            leaf bandwidth {
+                type uint32;
+                default 0;
             }
 
-        } 
-        
+        }
+        container DSCP-VOICE-OUT{
+
+            leaf bandwidth {
+                type uint32;
+                default 0;
+            }
+
+        }
+        container DSCP-INTERACTIVE-OUT{
+
+            leaf bandwidth {
+                type uint32;
+                default 0;
+            }
+
+        }
     }
 
     grouping shaper {
@@ -373,28 +389,7 @@ module network {
 
                     }
 
-                    container DSCP-STANDARD-OUT{
-
-                        leaf bandwidth {
-                            type uint32;
-                            default 0;
-                        }
-                    }    
-                    container DSCP-BUSINESS-OUT{
-
-                        leaf bandwidth {
-                            type uint32;
-                            default 0;
-                        }
-                    }
-                    container DSCP-VIDEO-OUT{
-
-                        leaf bandwidth {
-                            type uint32;
-                            default 0;
-                        }
-
-                    }
+                    uses classes; 
 
 
 

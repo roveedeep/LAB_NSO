@@ -22,13 +22,34 @@ class ServiceCallbacks(Service):
         self.log.info(service.DSCP_STANDARD_OUT.bandwidth )
         if service.DSCP_STANDARD_OUT.bandwidth > 0 :
             vars.add('s_bandwidth' , 'true')
-        if service.DSCP_STANDARD_OUT.bandwidth == 0 :
-            vars.add('s_bandwidth' , 'false')
 
         if service.DSCP_BUSINESS_OUT.bandwidth > 0 :
             vars.add('b_bandwidth' , 'true')
+
+        if service.DSCP_VOICE_OUT.bandwidth > 0 :
+            vars.add('vo_bandwidth' , 'true')
+
+        if service.DSCP_VIDEO_OUT.bandwidth > 0 :
+            vars.add('vi_bandwidth' , 'true')
+
+        if service.DSCP_INTERACTIVE_OUT.bandwidth > 0 :
+            vars.add('i_bandwidth' , 'true')
+
+        if service.DSCP_STANDARD_OUT.bandwidth == 0 :
+            vars.add('s_bandwidth' , 'false')
+
         if service.DSCP_BUSINESS_OUT.bandwidth == 0 :
             vars.add('b_bandwidth' , 'false')
+
+        if service.DSCP_VOICE_OUT.bandwidth == 0 :
+            vars.add('vo_bandwidth' , 'false')
+
+        if service.DSCP_VIDEO_OUT.bandwidth == 0 :
+            vars.add('vi_bandwidth' , 'false')
+
+        if service.DSCP_INTERACTIVE_OUT.bandwidth == 0 :
+            vars.add('i_bandwidth' , 'false')
+
 
         template.apply('qos-template', vars)
         template.apply('qos-child-template', vars)
