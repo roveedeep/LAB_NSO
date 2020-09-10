@@ -73,8 +73,8 @@ module network {
 
     grouping classes {
        
-        list class {
-            key 'class_name';
+        list classs {
+            key 'class_name bandwidth-percent';
             leaf class_name{
                 type enumeration {
                     enum DSCP-VOICE-OUT;
@@ -230,6 +230,7 @@ module network {
                         type string;
         
                         }
+
                     leaf ip {
                         tailf:info "example : x.x.x.x";
                         type inet:ipv4-address;
@@ -366,34 +367,53 @@ module network {
                     type string;
                 }
                 list qos {
-                    key 'shaper';
-                    leaf shaper {
-                        type union {
-                            type enumeration {
-                                enum 1MB;
-                                enum 2MB;
-                                enum 4MB;
-                                enum 10MB;
-                                enum 20MB;
-                                enum 30MB;
-                                enum 40MB;
-                            }
-
-                        tailf:info "size in MB :1-100";
+                    key 'shaper_size';
+                    leaf shaper_size {
                         type uint32;
+
+                    }
+
+                    container DSCP-STANDARD-OUT{
+
+                        leaf bandwidth {
+                            type uint32;
+                            default 0;
+                        }
+                    }    
+                    container DSCP-BUSINESS-OUT{
+
+                        leaf bandwidth {
+                            type uint32;
+                            default 0;
                         }
                     }
-                    container policer-child {
-                        uses classes;
+                    container DSCP-VIDEO-OUT{
+
+                        leaf bandwidth {
+                            type uint32;
+                            default 0;
+                        }
+
                     }
+
+
 
                     uses ncs:service-data;
                     ncs:servicepoint qos-vpn-servicepoint;
 
-                }
+                    leaf-list device {
+                        
+                        type leafref{
+                        path 
+                        "/network/cust[vrf=current()/../../../../vrf]/vpn/solutionID[solution_id=current()/../../solution_id]/interface/device";
+                        }
+
+                    }
+                    
+                }   
 
             }
-
+            
         
             // end ----OF----STATIC
 

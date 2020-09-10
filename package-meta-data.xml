@@ -58,5 +58,11 @@
       <python-class-name>network.qos-vpn.Main</python-class-name>
     </application>
   </component>
+  <component>
+    <name>qos-vpn-child</name>
+    <application>
+      <python-class-name>network.qos-vpn-child.Main</python-class-name>
+    </application>
+  </component>
 
 </ncs-package>

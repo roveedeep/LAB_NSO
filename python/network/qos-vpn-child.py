@@ -15,22 +15,7 @@ class ServiceCallbacks(Service):
         self.log.info('Service create(service=', service._path, ')')
         vars = ncs.template.Variables()
         template = ncs.template.Template(service)
-        vars.add('parent_name', 'parent_test')
         vars.add('child_name', 'child_test')
-        vars.add('bps', '10000')
-
-        self.log.info(service.DSCP_STANDARD_OUT.bandwidth )
-        if service.DSCP_STANDARD_OUT.bandwidth > 0 :
-            vars.add('s_bandwidth' , 'true')
-        if service.DSCP_STANDARD_OUT.bandwidth == 0 :
-            vars.add('s_bandwidth' , 'false')
-
-        if service.DSCP_BUSINESS_OUT.bandwidth > 0 :
-            vars.add('b_bandwidth' , 'true')
-        if service.DSCP_BUSINESS_OUT.bandwidth == 0 :
-            vars.add('b_bandwidth' , 'false')
-
-        template.apply('qos-template', vars)
         template.apply('qos-child-template', vars)
 
 # ---------------------------------------------
@@ -45,7 +30,7 @@ class Main(ncs.application.Application):
         # Service callbacks require a registration for a 'service point',
         # as specified in the corresponding data model.
         #
-        self.register_service('qos-vpn-servicepoint', ServiceCallbacks)
+        self.register_service('qos-vpn-child-servicepoint', ServiceCallbacks)
         # If we registered any callback(s) above, the Application class
         # took care of creating a daemon (related to the service/action point).
 
