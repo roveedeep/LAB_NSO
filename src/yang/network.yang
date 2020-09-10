@@ -229,7 +229,11 @@ module network {
                         "/network/cust[vrf=current()/../../../../vrf]/l3vpn/device";
                         }
                     }
-                   
+                    leaf policy-map {
+                         type leafref {
+                            path "/network/cust[vrf=current()/../../../../vrf]/vpn/solutionID[solution_id=current()/../../solution_id]/qos/shaper_size";
+                        }
+                    }
                     leaf vlan {
                         config false;
                         tailf:cdb-oper {

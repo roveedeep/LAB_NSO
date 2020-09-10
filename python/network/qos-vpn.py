@@ -15,9 +15,11 @@ class ServiceCallbacks(Service):
         self.log.info('Service create(service=', service._path, ')')
         vars = ncs.template.Variables()
         template = ncs.template.Template(service)
+
+        bps = service.shaper_size * 100000
         vars.add('parent_name', 'parent_test')
         vars.add('child_name', 'child_test')
-        vars.add('bps', '10000')
+        vars.add('bps', bps)
 
         self.log.info(service.DSCP_STANDARD_OUT.bandwidth )
         if service.DSCP_STANDARD_OUT.bandwidth > 0 :

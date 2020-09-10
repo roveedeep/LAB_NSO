@@ -4,7 +4,7 @@
       <name>{/device}</name>
       <config>
       <policy-map xmlns="urn:ios">
-          <name>{$child_name}</name>
+          <name>{/../../../vrf}_{/shaper_size}__{/DSCP-BUSINESS-OUT/bandwidth}_{/DSCP-STANDARD-OUT/bandwidth}_{/DSCP-VOICE-OUT/bandwidth}_{/DSCP-VIDEO-OUT/bandwidth}_{/DSCP-INTERACTIVE-OUT/bandwidth}_{/../solution_id}</name>
         <class when="{starts-with($b_bandwidth, 'true')}" >
             <name>DSCP-BUSINESS-OUT</name>
             <bandwidth>
@@ -19,9 +19,9 @@
         </class>
         <class when="{starts-with($vo_bandwidth, 'true')}" >
             <name>DSCP-VOICE-OUT</name>
-            <bandwidth>
+            <priority>
                 <percent>{/DSCP-VOICE-OUT/bandwidth}</percent>
-            </bandwidth>
+            </priority>
         </class>
         <class when="{starts-with($vi_bandwidth, 'true')}" >
             <name>DSCP-VIDEO-OUT</name>

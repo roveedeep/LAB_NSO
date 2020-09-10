@@ -23,6 +23,10 @@
                         </primary>
                     </address>
                 </ip>
+                <service-policy>
+                    <output>{/../../../vrf}-{/policy-map}MB-OUT</output>
+                </service-policy>
+
                 <shutdown when="{starts-with($shutdown, 'true')}" />
           </Ethernet>
         </interface>
