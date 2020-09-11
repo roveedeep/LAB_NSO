@@ -7,6 +7,8 @@
           <Ethernet>
               <name>{$interface_name}</name>
               <description>[cust] - {/../../../description} - {/../description} - Solution-ID [{/../solution_id}]</description>
+              <description when="{starts-with(/reason, 'suspension')}">[cust] - {/../../../description} - {/../description} - Solution-ID [{/../solution_id}] - SUSPENDED - {/SR}</description>
+              <description when="{starts-with(/reason, 'troubleshooting')}">[cust] - {/../../../description} - {/../description} - Solution-ID [{/../solution_id}] - {/reason}</description>
                 <encapsulation>
                     <dot1Q>
                         <vlan-id>{$vlan}</vlan-id>

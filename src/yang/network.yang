@@ -139,9 +139,7 @@ module network {
                     enum vrf-defination;
                 }
             } 
-            uses ncs:service-data;
-            ncs:servicepoint network-servicepoint;
-          
+         
             leaf-list device {
                 type leafref {
                     path "/ncs:devices/ncs:device/ncs:name";
@@ -165,7 +163,9 @@ module network {
                 type route-target;
 
             }
-
+            uses ncs:service-data;
+            ncs:servicepoint network-servicepoint;
+ 
         }
     // l3vpn <----END---->
 
@@ -253,6 +253,22 @@ module network {
                         default up;
                     }
 
+                    leaf reason {
+                        mandatory true;
+                        when "../status = 'down'";
+                        type enumeration{
+                            enum suspension;
+                            enum troubleshooting;
+                        }
+                    }
+
+                    leaf SR {
+                        tailf:info "SRxxxxxx-xxxxxx";
+                        mandatory true;
+                        when "../reason = 'suspension'";
+                        type string;
+                    }
+
                 }
                 //-------------------INTERFACE--EBD----    
                 
@@ -271,6 +287,7 @@ module network {
 
                         leaf remote_as {
                             tailf:info "range : 1-65535";
+                            mandatory true;
                             type uint32{
                                 range "1..65535";
                             }
@@ -381,9 +398,6 @@ module network {
                         }
 
 
-                    uses ncs:service-data;
-                    ncs:servicepoint qos-vpn-servicepoint;
-
                     leaf-list device {
                         
                         type leafref{
@@ -392,7 +406,10 @@ module network {
                         }
 
                     }
-                    
+                     uses ncs:service-data;
+                    ncs:servicepoint qos-vpn-servicepoint;
+
+                   
                 }   
 
             }
