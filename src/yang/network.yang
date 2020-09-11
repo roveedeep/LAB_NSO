@@ -112,29 +112,6 @@ module network {
         }
     }
 
-    grouping shaper {
-        
-        list shaper {
-            key 'shaper_name';
-            leaf shaper_name {
-                type union {
-                    type enumeration {
-                        enum 1MB;
-                        enum 2MB;
-                        enum 4MB;
-                        enum 10MB;
-                        enum 20MB;
-                        enum 30MB;
-                        enum 40MB;
-                    }
-
-                    tailf:info "size in MB :1-100";
-                    type uint32;
-                }
-
-            }
-        }
-    }
 
    container network {
     description "This is an RFS skeleton service";
@@ -155,9 +132,13 @@ module network {
         }
  
     // vpn <----start---->
-        container l3vpn {
-            presence l3vpn;
-           
+        list l3vpn {
+            key 'vrf';
+            leaf vrf {
+                type enumeration {
+                    enum vrf-defination;
+                }
+            } 
             uses ncs:service-data;
             ncs:servicepoint network-servicepoint;
           
@@ -383,9 +364,7 @@ module network {
 
                 }
 
-                leaf test {
-                    type string;
-                }
+                
                 list qos {
                     key 'shaper_size';
                     leaf shaper_size {
@@ -395,6 +374,14 @@ module network {
 
                     uses classes; 
 
+                    leaf policy_name {
+                        config false;
+                        tailf:cdb-oper {
+                        tailf:persistent true;
+                        }
+                        type string;
+        
+                        }
 
 
                     uses ncs:service-data;
