@@ -243,17 +243,14 @@ module network {
 
                     }
 
-                    leaf description {
-                        type string;
-                    }
         
-                    leaf shutdown {
+                    leaf status {
                         type enumeration {
-                            enum true;
-                            enum false;
+                            enum up;
+                            enum down;
 
                         }
-                        default false;
+                        default up;
                     }
 
                 }

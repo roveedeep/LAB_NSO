@@ -26,8 +26,11 @@
                 <service-policy>
                     <output>{/../../../vrf}-{/policy-map}MB-OUT</output>
                 </service-policy>
+                <service-policy>
+                    <input>VB-MANAGED-IN</input>
+                </service-policy>
 
-                <shutdown when="{starts-with($shutdown, 'true')}" />
+                <shutdown when="{starts-with($shutdown, 'down')}" />
           </Ethernet>
         </interface>
        </config>

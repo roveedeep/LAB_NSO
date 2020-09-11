@@ -18,7 +18,7 @@ class ServiceCallbacks(Service):
         p_int, vlan = str(service.interface_name).split('.')
         switch_device = service.device
         vars.add('vlan', vlan)
-        vars.add('shutdown', service.shutdown)
+        vars.add('shutdown', service.status)
         vars.add('interface_name', service.interface_name)
         service.vlan = vlan
         service.pe_interface = str(service.interface_type) + service.interface_name
