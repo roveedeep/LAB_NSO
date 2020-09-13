@@ -75,24 +75,37 @@ module network {
         leaf STANDARD{
 
                 type union{
-                    type uint32;
-                    type string;
+                    type uint32{
+                        range "1..100";
+                    }
+                    type enumeration{
+                        enum n/a;
+                    }
                 }
                 default n/a;
         }    
         leaf BUSINESS{
 
-                type union {
-                    type uint32;
-                    type string;
+                type union{
+                    type uint32{
+                        range "1..100";
+                    }
+                    type enumeration{
+                        enum n/a;
+                    }
                 }
                 default n/a;
+
         }
         leaf VIDEO{
 
-                type union {
-                    type uint32;
-                    type string;
+                type union{
+                    type uint32{
+                        range "1..100";
+                    }
+                    type enumeration{
+                        enum n/a;
+                    }
                 }
                 default n/a;
 
@@ -100,18 +113,26 @@ module network {
         }
         leaf VOICE{
 
-                type union {
-                    type uint32;
-                    type string;
+                type union{
+                    type uint32{
+                        range "1..100";
+                    }
+                    type enumeration{
+                        enum n/a;
+                    }
                 }
                 default n/a;
 
         }
         leaf INTERACTIVE{
 
-                type union {
-                    type uint32;
-                    type string;
+                type union{
+                    type uint32{
+                        range "1..100";
+                    }
+                    type enumeration{
+                        enum n/a;
+                    }
                 }
                 default n/a;
 
@@ -322,6 +343,15 @@ module network {
                             tailf:info "example xx:xx";
                             type route-target;
                         }
+
+                        leaf shutdown {
+                            type enumeration {
+                                enum true;
+                                enum false;
+                            }
+
+                            default false;
+                        }
                         uses ncs:service-data;
                         ncs:servicepoint bgp-servicepoint;
 
@@ -347,18 +377,18 @@ module network {
                             tailf:info "example : x.x.x.x/x";
                             type ipv4-prefix;
                         }
-
-                        container interface {
-                            leaf Ethernet {
-                                tailf:info "Ethernet";
-                                type leafref{
-                                     path 
-                                "/network/cust[vrf=current()/../../../../../../vrf]/vpn/solutionID[solution_id=current()/../../../../solution_id]/interface/interface_name";
-                                }
-                                mandatory true;
+                        
+                        
+                        
+                        leaf Ethernet {
+                            type leafref{
+                                 path 
+                            "/network/cust[vrf=current()/../../../../../vrf]/vpn/solutionID[solution_id=current()/../../../solution_id]/interface/interface_name";
                             }
-
+                            mandatory true;
                         }
+
+
                            
                         leaf device {
                             type leafref{

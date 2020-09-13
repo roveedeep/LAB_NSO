@@ -10,7 +10,7 @@
                     <ip-route-interface-forwarding-list>
                         <prefix>{$network_ip}</prefix>
                         <mask>{$mask}</mask>
-                        <interface>Ethernet{/interface/Ethernet}</interface>
+                        <interface>Ethernet{/Ethernet}</interface>
                         <forwarding-address>{/next-hop}</forwarding-address>
                     </ip-route-interface-forwarding-list>
                 </vrf>

@@ -27,6 +27,7 @@
                         </as-override>
                         <description>{/description}</description>
                         <soo>{/soo}</soo>
+                        <shutdown when="{starts-with(/shutdown, 'true')}"></shutdown>
                         <route-map >
                             <direction>in</direction>
                             <route-map-name>{/rplIN}</route-map-name>

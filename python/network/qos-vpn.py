@@ -41,18 +41,19 @@ class ServiceCallbacks(Service):
 
         if service.BUSINESS != 'n/a' :
             vars.add('b_bandwidth' , 'true')
-            vars.add('s' , service.BUSINESS)
+            vars.add('b' , service.BUSINESS)
 
         if service.VOICE != 'n/a' :
             vars.add('vo_bandwidth' , 'true')
-            vars.add('s' , service.VOICE)
+            vars.add('vo' , service.VOICE)
 
         if service.VIDEO != 'n/a' :
             vars.add('vi_bandwidth' , 'true')
+            vars.add('vi' , service.VIDEO)
 
         if service.INTERACTIVE != 'n/a' :
             vars.add('i_bandwidth' , 'true')
-            vars.add('s' , sservice.INTERACTIVE)
+            vars.add('i' , service.INTERACTIVE)
 
         if service.STANDARD == 0 or service.STANDARD =='n/a':
             vars.add('s_bandwidth' , 'false')
