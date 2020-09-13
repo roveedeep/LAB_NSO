@@ -15,40 +15,64 @@ class ServiceCallbacks(Service):
         self.log.info('Service create(service=', service._path, ')')
         vars = ncs.template.Variables()
         template = ncs.template.Template(service)
-        service.policy_name = 'VRF-'+str(service.shaper_size)+'MB-OUT'
-        bps = service.shaper_size * 100000
-        vars.add('bps', bps)
+        service.policy_name = 'VRF-'+str.upper(service.shaper_size)+'-OUT'
 
-        self.log.info(service.DSCP_STANDARD_OUT.bandwidth )
-        if service.DSCP_STANDARD_OUT.bandwidth > 0 :
+        bps = service.shaper_size
+        if ('k' in bps) == True:
+            shaper,a = str(bps).split('k')
+            bps = int(shaper)*10240
+            self.log.info(bps)
+            vars.add('bps', bps)
+
+        if ('m' in str(bps)) == True:
+            shaper,a = str(bps).split('m')
+            bps = int(shaper)*1000000
+            vars.add('bps', bps)
+
+        if ('g' in str(bps)) == True:
+            shaper,a = str(bps).split('m')
+            bps = int(shaper)*1000000
+            vars.add('bps', bps)
+
+
+        if service.STANDARD != 'n/a' :
             vars.add('s_bandwidth' , 'true')
+            vars.add('s' , service.STANDARD)
 
-        if service.DSCP_BUSINESS_OUT.bandwidth > 0 :
+        if service.BUSINESS != 'n/a' :
             vars.add('b_bandwidth' , 'true')
+            vars.add('s' , service.BUSINESS)
 
-        if service.DSCP_VOICE_OUT.bandwidth > 0 :
+        if service.VOICE != 'n/a' :
             vars.add('vo_bandwidth' , 'true')
+            vars.add('s' , service.VOICE)
 
-        if service.DSCP_VIDEO_OUT.bandwidth > 0 :
+        if service.VIDEO != 'n/a' :
             vars.add('vi_bandwidth' , 'true')
 
-        if service.DSCP_INTERACTIVE_OUT.bandwidth > 0 :
+        if service.INTERACTIVE != 'n/a' :
             vars.add('i_bandwidth' , 'true')
+            vars.add('s' , sservice.INTERACTIVE)
 
-        if service.DSCP_STANDARD_OUT.bandwidth == 0 :
+        if service.STANDARD == 0 or service.STANDARD =='n/a':
             vars.add('s_bandwidth' , 'false')
+            vars.add('s' , '0')
 
-        if service.DSCP_BUSINESS_OUT.bandwidth == 0 :
+        if service.BUSINESS == 0 or service.BUSINESS == 'n/a' :
             vars.add('b_bandwidth' , 'false')
+            vars.add('b' , '0')
 
-        if service.DSCP_VOICE_OUT.bandwidth == 0 :
+        if service.VOICE == 0 or service.VOICE == 'n/a' :
             vars.add('vo_bandwidth' , 'false')
+            vars.add('vo' , '0')
 
-        if service.DSCP_VIDEO_OUT.bandwidth == 0 :
+        if service.VIDEO == 0 or service.VIDEO == 'n/a' :
             vars.add('vi_bandwidth' , 'false')
+            vars.add('vi' , '0')
 
-        if service.DSCP_INTERACTIVE_OUT.bandwidth == 0 :
+        if service.INTERACTIVE == 0 or service.INTERACTIVE == 'n/a'  :
             vars.add('i_bandwidth' , 'false')
+            vars.add('i' , '0')
 
 
         template.apply('qos-template', vars)

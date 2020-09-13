@@ -31,9 +31,9 @@
                             <direction>in</direction>
                             <route-map-name>{/rplIN}</route-map-name>
                         </route-map>
-                        <route-map >
-                            <direction>{/rplOUT/direction}</direction>
-                            <route-map-name>{/rplOUT/rpl_name}</route-map-name>
+                        <route-map when="{starts-with($rplOUT, 'true')}">
+                            <direction>out</direction>
+                            <route-map-name>{/rplOUT}</route-map-name>
                         </route-map>
                     </neighbor>
                   </vrf>

@@ -26,7 +26,7 @@
                     </address>
                 </ip>
                 <service-policy>
-                    <output>{/../../../vrf}-{/policy-map}MB-OUT</output>
+                    <output>{/../../../vrf}-{/policy-map}b-OUT</output>
                 </service-policy>
                 <service-policy>
                     <input>VB-MANAGED-IN</input>

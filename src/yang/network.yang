@@ -72,42 +72,48 @@ module network {
     }
 
     grouping classes {
-        container DSCP-STANDARD-OUT{
+        leaf STANDARD{
 
-            leaf bandwidth {
-                type uint32;
-                default 0;
-            }
+                type union{
+                    type uint32;
+                    type string;
+                }
+                default n/a;
         }    
-        container DSCP-BUSINESS-OUT{
+        leaf BUSINESS{
 
-            leaf bandwidth {
-                type uint32;
-                default 0;
-            }
+                type union {
+                    type uint32;
+                    type string;
+                }
+                default n/a;
         }
-        container DSCP-VIDEO-OUT{
+        leaf VIDEO{
 
-            leaf bandwidth {
-                type uint32;
-                default 0;
-            }
+                type union {
+                    type uint32;
+                    type string;
+                }
+                default n/a;
 
-        }
-        container DSCP-VOICE-OUT{
-
-            leaf bandwidth {
-                type uint32;
-                default 0;
-            }
 
         }
-        container DSCP-INTERACTIVE-OUT{
+        leaf VOICE{
 
-            leaf bandwidth {
-                type uint32;
-                default 0;
-            }
+                type union {
+                    type uint32;
+                    type string;
+                }
+                default n/a;
+
+        }
+        leaf INTERACTIVE{
+
+                type union {
+                    type uint32;
+                    type string;
+                }
+                default n/a;
 
         }
     }
@@ -282,9 +288,7 @@ module network {
                             tailf:info "example : x.x.x.x";
                             type inet:ipv4-address;
                         }
-                        uses ncs:service-data;
-                        ncs:servicepoint bgp-servicepoint;
-
+                        
                         leaf remote_as {
                             tailf:info "range : 1-65535";
                             mandatory true;
@@ -309,25 +313,17 @@ module network {
                             default lp_2000;
                         }
 
-                        list rplOUT {
-                            key "rpl_name direction";
-                            leaf rpl_name {
-                                tailf:info "outbound route-policy";
-                                type string;
-                            }
-
-                            leaf direction {
-                                type enumeration {
-                                    enum in;
-                                    enum out;
-                                }
-                            }
+                        leaf rplOUT {
+                            type string;
+                            default n/a;
                         }
                             
                         leaf soo {
                             tailf:info "example xx:xx";
                             type route-target;
                         }
+                        uses ncs:service-data;
+                        ncs:servicepoint bgp-servicepoint;
 
                                     
                     }
@@ -363,9 +359,7 @@ module network {
                             }
 
                         }
-                        uses ncs:service-data;
-                        ncs:servicepoint static-servicepoint;
-                            
+                           
                         leaf device {
                             type leafref{
                                 path 
@@ -373,6 +367,8 @@ module network {
                             }
 
                         }                    
+                        uses ncs:service-data;
+                        ncs:servicepoint static-servicepoint;
                        
                     }
 
@@ -382,7 +378,7 @@ module network {
                 list qos {
                     key 'shaper_size';
                     leaf shaper_size {
-                        type uint32;
+                        type string;
 
                     }
 

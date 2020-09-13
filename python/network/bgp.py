@@ -16,6 +16,11 @@ class ServiceCallbacks(Service):
         vars = ncs.template.Variables()
 #        vars.add('AS', as_nun)
         template = ncs.template.Template(service)
+        if service.rplOUT != 'n/a':
+            vars.add('rplOUT', 'true')
+
+        elif service.rplOUT == 'n/a':
+            vars.add('rplOUT', 'false')
 
         isp2 = ['uk1','uk2','uk3','uk4']
         isp3 = ['o1','o2','o3','o4']
